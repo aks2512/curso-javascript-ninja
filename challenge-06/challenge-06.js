@@ -81,22 +81,16 @@ function convertToHex(color) {
     switch(color) {
         case 'white':
             return "O hexadecimal para a cor " + color + " é #FFFFFF.";
-            break;
         case 'black':
             return "O hexadecimal para a cor " + color + " é #000000.";
-            break;
         case 'gray':
             return "O hexadecimal para a cor " + color + " é #D3D3D3.";
-            break;
         case 'red':
             return "O hexadecimal para a cor " + color + " é #FF0000.";
-            break;
         case 'green':
             return "O hexadecimal para a cor " + color + " é #008000.";
-            break;
         default:
             return "Não temos o equivalente hexadecimal para " + color + ".";
-            break;
     }
 }
 
