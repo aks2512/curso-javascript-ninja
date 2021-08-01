@@ -52,7 +52,6 @@ função acima. Entre esses 4, adicione 1 que não esteja entre os 5 primeiros.
 console.log(showTeamPosition(2));
 console.log(showTeamPosition(3));
 console.log(showTeamPosition(4));
-teams.push('time6');
 console.log(showTeamPosition(5));
 
 /*
