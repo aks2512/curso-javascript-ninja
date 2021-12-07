@@ -8,6 +8,12 @@ loop, mostre no console a mensagem:
 Qual loop você deve usar para que essa mensagem seja mostrada no console?
 */
 // ?
+// do-while
+var once = false;
+
+do {
+  console.log('Entrou ao menos uma vez!')
+} while(once === true);
 
 /*
 Crie um objeto chamado `person`, que receba as seguintes propriedades:
@@ -15,6 +21,12 @@ Crie um objeto chamado `person`, que receba as seguintes propriedades:
 para o nome, idade, peso e data de nascimento dessa pessoa.
 */
 // ?
+var person = {
+  name: 'akira',
+  age: 23,
+  weight: '100',
+  birthday: '25/12'
+}
 
 /*
 Use um loop para percorrer o objeto criado acima, mostrando no console
@@ -26,6 +38,9 @@ Após o loop, mostre a frase:
 'The person has [COUNTER] properties'
 */
 // ?
+Object.keys(person).forEach((key) => {
+  console.log('The %s of person is %s',key,person[key]);
+})
 
 /*
 Crie uma função chamada `moreThan`, que vai verificar se a pessoa (objeto
@@ -35,6 +50,12 @@ Após a função, mostrar a mensagem no console:
 'The person has more than 25 years old? [TRUE/FALSE]'
 */
 // ?
+function moreThan(age) {
+  return (age < person.age)
+}
+
+console.log('The person has more than 25 years old? ', moreThan(20)); //mais nova
+console.log('The person has more than 25 years old? ',moreThan(25)); //mais velha
 
 /*
 Faça um loop de 0 a 20, que adicione cada número como um item de um
@@ -42,8 +63,18 @@ array chamado `numbers`. Se o contador for maior que 10, saia do loop.
 Mostre no console os números no array.
 */
 console.log( 'De 0 a 10:' );
+let count = 0;
+let numbers = [];
 // ?
+for(let i = 0; i <= 20; i++) {
+  count += i;
+  numbers.push(i);
+  if(count < 10) {
+    break;
+  }
+}
 
+console.log(numbers);
 /*
 Faça outro loop de 0 a 20, que adicione a um array chamado `numbers` (já
 criado acima, só precisa ser reiniciado) números de 0 a 20, inclusive
@@ -52,3 +83,11 @@ Mostrar no console os números do array.
 */
 console.log( 'Pares de 0 a 20:' );
 // ?
+
+numbers=[];
+
+for(let i = 1; i <= 20; i+2) {
+  numbers.push(i);
+}
+
+console.log(numbers);
