@@ -1,4 +1,4 @@
-(function() {
+(function(win, doc) {
   'use strict';
 
   /*
@@ -10,7 +10,7 @@
   telefone (já vamos ver como isso vai ser feito)
   - Ao abrir a tela, ainda não teremos carros cadastrados. Então deverá ter
   um formulário para cadastro do carro, com os seguintes campos:
-    - Imagem do carro (deverá aceitar uma URL)
+    - Imagem do carro (deverá aceitar uma URL )
     - Marca / Modelo
     - Ano
     - Placa
@@ -36,4 +36,78 @@
   que será nomeado de "app".
   */
 
-})();
+  var app = (function() {
+
+    return {
+      init: function init() {
+        this.companyInfo();
+        this.initEvents();
+      },
+      
+      initEvents: function initEvents() {
+        console.log('teste')
+        $('[data-js="form-register"]').on('submit', this.handleSubmit);
+      },
+
+      handleSubmit: function handleSubmit(e) {
+        e.preventDefault();
+        console.log('submit');
+        var $tableCar = $('[data-js="table-car"]').get();
+        $tableCar.appendChild(app.createNewCar());
+      },
+
+      createNewCar: function createNewCar() {
+        var $fragment = doc.createDocumentFragment();
+        var $tr = doc.createElement('tr');
+        var $tdImage = doc.createElement('td');
+        var $image = doc.createElement('img');
+        var $tdBrand = doc.createElement('td');
+        var $tdYear = doc.createElement('td');
+        var $tdPlate = doc.createElement('td');
+        var $tdColor = doc.createElement('td');
+
+        $image.src = $('[data-js="image"]').get().value;
+        
+        $tdImage.appendChild($image);
+        $tdBrand.textContent = $('[data-js="brand-model"]').get().value;
+        $tdYear.textContent = $('[data-js="year"]').get().value;
+        $tdPlate.textContent = $('[data-js="plate"]').get().value;
+        $tdColor.textContent = $('[data-js="color"]').get().value;
+
+
+        $tr.appendChild($tdImage);
+        $tr.appendChild($tdBrand);
+        $tr.appendChild($tdYear);
+        $tr.appendChild($tdPlate);
+        $tr.appendChild($tdColor);
+
+        return $fragment.appendChild($tr);
+      },
+
+      companyInfo: function companyInfo() {
+        var ajax = new XMLHttpRequest();
+        ajax.open('GET', '/challenge-29/company.json', true);
+        ajax.send();
+        ajax.addEventListener('readystatechange', this.getCompanyInfo, false);
+      },
+
+      getCompanyInfo: function getCompanyInfo() {
+        if(!app.isReady.call(this))
+          return;
+
+        var data = JSON.parse(this.responseText);
+        var $companyName = $('[data-js="company-name"]').get();
+        var $companyPhone = $('[data-js="company-phone"]').get();
+        $companyName.textContent = data.name;
+        $companyPhone.textContent = data.phone;
+      },
+
+      isReady: function isReady() {
+        return this.readyState === 4 && this.status === 200;
+      }
+    };
+  })();
+
+  app.init();
+
+})(window, document);

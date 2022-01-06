@@ -21,6 +21,26 @@ Só passe para o próximo problema quando tiver resolvido o anterior :)
 */
 // ?
 
+function DOM(elements) {
+  this.elements = document.querySelectorAll(elements);
+};
+
+DOM.prototype.on = function on(eventType, callback) {
+  this.elements.forEach((element) => {
+    element.addEventListener(eventType, callback, false);
+  });
+}
+
+DOM.prototype.off = function off(eventType, callback) {
+  this.elements.forEach((element) => {
+    element.removeEventListener(eventType, callback, false);
+  });
+}
+
+DOM.prototype.get = function get() {
+  return this.elements;
+}
+
 var $a = new DOM('[data-js="link"]');
 $a.on('click', function(e) {
   e.preventDefault();
@@ -29,3 +49,4 @@ $a.on('click', function(e) {
 
 console.log('Elementos selecionados:', $a.get());
 console.log('$a é filho de body?', $a.get()[0].parentNode === document.body);
+
